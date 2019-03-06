@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {
-  map
-} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+// Class & Interfaces
 import { Playlist } from './deezer.class';
-
+/**
+ * Deezer Service
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -25,25 +25,43 @@ export class DeezerService {
    * @param http
    */
   constructor(private http: HttpClient) { }
-
-  getAllPlaylist(id: string): Observable<Playlist[]> {
+  /**
+   * @name getAllPlaylist
+   * @param id
+   */
+  public getAllPlaylist(id: string): Observable<Playlist[]> {
     return this.http.jsonp<any>(`${this.userURL}/${id}/playlists?output=jsonp`, 'callback').pipe(
-      map(res => {
-        return res.data.map(item => new Playlist(
-          item.id,
-          item.title,
-          item.picture_big,
-          item.creator,
-          item.creation_date,
-          item.duration
-        ));
-      })
-    )
+      map(res => res.data.map(item => this.mappingPlaylist(item)))
+    );
   }
-  getPlaylist(id: string) {
-    return this.http.get(`${this.playlistURL}/${id}`);
+  /**
+   * @name getPlaylist
+   * @param id
+   */
+  public getPlaylist(id: string) {
+    return this.http.jsonp<any>(`${this.playlistURL}/${id}?output=jsonp`, 'callback').pipe(
+      map(res => this.mappingPlaylist(res))
+    );
   }
-  getTracks(id: string) {
+  /**
+   * @name getTracks
+   * @param id
+   */
+  public getTracks(id: string) {
     return this.http.get(`${this.playlistURL}/${id}/tracks`);
+  }
+  /**
+   * @name mappingPlaylist
+   * @param item
+   */
+  private mappingPlaylist(item): Playlist {
+    return new Playlist(
+      item.id,
+      item.title,
+      item.picture_big,
+      item.creator,
+      item.creation_date,
+      item.duration
+    );
   }
 }

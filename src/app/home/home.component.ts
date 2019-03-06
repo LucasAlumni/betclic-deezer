@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeezerService } from '../services/deezer.service';
-import { Subscription } from 'rxjs';
 import { Playlist } from '../services/deezer.class';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * @desc Link to go playlist
    */
   goPlaylist(id: number) {
-    this.router.navigate(['playlist', id])
+    this.router.navigate(['playlist', id]);
   }
   /**
    * OnDestroy
