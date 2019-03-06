@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DeezerService } from './services/deezer.service';
 // Angular-Material
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
     HttpClientJsonpModule,
     HttpClientModule,
     MatCardModule,
+    MatExpansionModule,
     AppRoutingModule,
   ],
   providers: [DeezerService],

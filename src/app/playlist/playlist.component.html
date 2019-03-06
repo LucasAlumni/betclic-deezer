@@ -1,3 +1,20 @@
-<p>
-  playlist works!
-</p>
+<div fxLayout="column" fxLayoutGap="1em">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Information de la playlist
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngIf="playlist" fxLayout fxLayoutAlign="space-between">
+      <div fxLayout="column" fxLayoutGap=".6em">
+        <span>Titre : {{playlist.title}}</span>
+        <span>Durée : {{ playlist.duration | date:'HH:mm:ss'}}</span>
+        <span>Auteur : {{ playlist.author?.name}}</span>
+      </div>
+      <img [src]="playlist.cover" alt="playlist-cover" class="cover">
+    </div>
+  </mat-expansion-panel>
+  <div>
+    VIRTUAL SCROLL
+  </div>
+</div>
