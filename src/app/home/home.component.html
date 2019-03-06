@@ -1,3 +1,8 @@
-<p>
-  home works!
-</p>
+<div fxLayout="row wrap" fxLayoutGap="1.4em">
+  <mat-card *ngFor="let playlist of playlists" fxFlex="calc(100%-1em)" fxFlex.gt-sm="calc(33%-1.4em)" class="playlist-card" (click)="goPlaylist(playlist.id)">
+    <mat-card-header>
+      <mat-card-title>{{ playlist.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="playlist.cover" alt="playlist-cover">
+  </mat-card>
+</div>
