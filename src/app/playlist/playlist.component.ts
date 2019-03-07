@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeezerService } from '../services/deezer.service';
 import { Playlist } from '../services/deezer.class';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 @Component({
   selector: 'app-playlist',
   templateUrl: './playlist.component.html',
@@ -13,6 +13,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   playlist$: Subscription;
   id: string;
   playlist: Playlist;
+  tracks$: Observable<any[]>;
   constructor(
     private route: ActivatedRoute,
     private deezerSvc: DeezerService
@@ -20,7 +21,11 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.params$ = this.route.params.subscribe(params => this.id = params.id ? params.id : null);
-    this.playlist$ = this.deezerSvc.getPlaylist(this.id).subscribe(data => this.playlist = data)
+    this.playlist$ = this.deezerSvc.getPlaylist(this.id).subscribe(data => this.playlist = data);
+    this.tracks$ = this.deezerSvc.getTracks(this.id);
+  }
+  onScrollIndexChange(index: number) {
+    console.log(index)
   }
   ngOnDestroy() {
     this.params$.unsubscribe();

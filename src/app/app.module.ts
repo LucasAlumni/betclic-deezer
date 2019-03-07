@@ -15,6 +15,7 @@ import { DeezerService } from './services/deezer.service';
 // Angular-Material
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HttpClientModule,
     MatCardModule,
     MatExpansionModule,
+    ScrollDispatchModule,
     AppRoutingModule,
   ],
   providers: [DeezerService],
