@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   /**
    * @name goPlaylist
-   * @param id
+   * @param id: playlist
    * @desc Link to go playlist
    */
   goPlaylist(id: number) {

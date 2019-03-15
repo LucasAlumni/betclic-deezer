@@ -1,7 +1,14 @@
-import { Deezer } from './deezer.class';
+import { Playlist } from './deezer.class';
 
-describe('Deezer', () => {
+describe('Playlist', () => {
   it('should create an instance', () => {
-    expect(new Deezer()).toBeTruthy();
+    expect(new Playlist(
+      0,
+      'test',
+      'cover',
+      null,
+      'date',
+      0
+    )).toBeTruthy();
   });
 });

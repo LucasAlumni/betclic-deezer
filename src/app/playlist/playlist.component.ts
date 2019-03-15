@@ -9,11 +9,11 @@ import { Subscription, Observable } from 'rxjs';
   styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
-  params$: Subscription;
-  playlist$: Subscription;
-  id: string;
-  playlist: Playlist;
-  tracks$: Observable<any[]>;
+  private params$: Subscription;
+  private playlist$: Subscription;
+  public id: string;
+  public playlist: Playlist;
+  // private tracks$: Observable<any[]>;
   constructor(
     private route: ActivatedRoute,
     private deezerSvc: DeezerService
@@ -22,12 +22,13 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.params$ = this.route.params.subscribe(params => this.id = params.id ? params.id : null);
     this.playlist$ = this.deezerSvc.getPlaylist(this.id).subscribe(data => this.playlist = data);
-    this.tracks$ = this.deezerSvc.getTracks(this.id);
+    // this.tracks$ = this.deezerSvc.getTracks(this.id);
   }
-  onScrollIndexChange(index: number) {
-    console.log(index)
-  }
+  // onScrollIndexChange(index: number) {
+  //   console.log(index);
+  // }
   ngOnDestroy() {
     this.params$.unsubscribe();
+    this.playlist$.unsubscribe();
   }
 }
