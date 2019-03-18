@@ -7,7 +7,7 @@ import { HomeComponent } from './home.component';
 import { MatCardModule } from '@angular/material/card';
 import { DeezerService } from '../services/deezer.service';
 import { Playlist } from '../services/deezer.class';
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -55,23 +55,19 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be return array of Playlist on init', () => {
+  it('should be return Observables of Playlist on init', () => {
     getTestScheduler().flush();
     fixture.detectChanges();
-    const playlists = component.playlists;
-    expect(playlists.length).toBe(1);
-    expect(playlists[0]).toEqual(fakeData);
+    const playlists: Observable<Playlist[]> = component.playlists$;
+    playlists.subscribe(data => {
+      expect(data.length).toBe(1);
+      expect(data[0]).toEqual(fakeData);
+    });
   });
 
   it('should click link', () => {
     const id = 5;
     component.goPlaylist(id);
     expect(routerSpy.navigate).toHaveBeenCalledWith(['playlist', id]);
-  });
-
-  it('should unsubscribe on destroy', () => {
-    component['subscription$'] = of(true).subscribe();
-    component.ngOnDestroy();
-    expect(component['subscription$'].closed).toBeTruthy();
   });
 });

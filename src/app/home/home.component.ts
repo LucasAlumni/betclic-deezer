@@ -1,17 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeezerService } from '../services/deezer.service';
 import { Playlist } from '../services/deezer.class';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  private subscription$: Subscription;
-  public playlists: Playlist[];
+export class HomeComponent implements OnInit {
+  public playlists$: Observable<Playlist[]>;
   /**
    * Inject
    * @param deezerSvc
@@ -24,21 +23,14 @@ export class HomeComponent implements OnInit, OnDestroy {
    * OnInit
    */
   ngOnInit() {
-    this.subscription$ = this.deezerSvc.getAllPlaylist('5')
-      .subscribe(playlists => this.playlists = playlists);
+    this.playlists$ = this.deezerSvc.getAllPlaylist('5');
   }
   /**
    * @name goPlaylist
    * @param id: playlist
    * @desc Link to go playlist
    */
-  goPlaylist(id: number) {
+  public goPlaylist(id: number) {
     this.router.navigate(['playlist', id]);
-  }
-  /**
-   * OnDestroy
-   */
-  ngOnDestroy() {
-    this.subscription$.unsubscribe();
   }
 }

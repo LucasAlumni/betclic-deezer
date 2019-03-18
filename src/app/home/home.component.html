@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="1em" fxLayoutAlign="start">
-  <ng-container *ngFor="let playlist of playlists">
+  <ng-container *ngFor="let playlist of playlists$ | async">
     <mat-card  class="playlist-card" (click)="goPlaylist(playlist.id)"
       fxFlex="0 1 calc(25% - 1em)"
       fxFlex.lt-lg="0 1 calc(33.3% - 1em)"
