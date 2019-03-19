@@ -8,15 +8,23 @@
     <div *ngIf="playlist" fxLayout fxLayoutAlign="space-between">
       <div fxLayout="column" fxLayoutGap=".6em">
         <span>Title : {{playlist.title}}</span>
-        <span>Duration : {{ playlist.duration | date:'HH:mm:ss'}}</span>
+        <span>Duration : {{ (playlist.duration * 1000) | date:'HH:mm:ss'}}</span>
         <span>Author : {{ playlist.author?.name}}</span>
       </div>
       <img [src]="playlist.cover" alt="playlist-cover" class="cover">
     </div>
   </mat-expansion-panel>
-  <!-- <div>
-    <cdk-virtual-scroll-viewport itemSize="100" class="example-viewport" (scrolledIndexChange)="onScrollIndexChange($event)">
-      <div *cdkVirtualFor="let track of tracks$ | async" class="example-item">{{track.id}}</div>
-    </cdk-virtual-scroll-viewport>
-  </div> -->
+  <mat-card >
+    <mat-card-header>
+      <mat-card-title>VirtualScroll</mat-card-title>
+    </mat-card-header>
+    <div>
+      <cdk-virtual-scroll-viewport class="tracks-viewport" [itemSize]="itemSize" [ngStyle]="{'height': scrollHeight + 'px' }" (scrolledIndexChange)="onScrollIndexChange($event)">
+        <div *cdkVirtualFor="let track of tracks" class="track-item" [ngStyle]="{'height': itemSize + 'px'}" >
+          <span *ngIf="track; else loading">{{track.title}}</span>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </mat-card>
 </div>
+<ng-template #loading>Chargement...</ng-template>

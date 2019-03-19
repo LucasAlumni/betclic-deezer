@@ -47,10 +47,8 @@ export class DeezerService {
    * @name getTracks
    * @param id
    */
-  public getTracks(id: string): Observable<any[]> {
-    return this.http.jsonp<any>(`${this.playlistURL}/${id}/tracks?output=jsonp`, 'callback').pipe(
-      map(res => res.data)
-    );
+  public getTracks(id: string, index: number, rows: number): Observable<any> {
+    return this.http.jsonp<any>(`${this.playlistURL}/${id}/tracks?index=${index}&limit=${rows}&output=jsonp`, 'callback');
   }
   /**
    * @name mappingPlaylist
