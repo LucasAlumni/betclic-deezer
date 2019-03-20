@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeezerService } from '../services/deezer.service';
-import { Playlist } from '../services/deezer.class';
+import { Playlist, Track } from '../services/deezer.class';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,7 +24,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   /**
    * list of tracks
    */
-  public tracks: any[] = null;
+  public tracks: Track[];
   /**
    * Total count
    */
@@ -69,7 +69,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
    */
   getData(index: number, rows: number): void {
     this.tracks$ = this.deezerSvc.getTracks(this.id, index, rows).subscribe(res => {
-      const data = res.data;
+      const data: Track[] = res.data;
       if (!this.tracks && index === 0) {
         this.totalCount = res.total;
         this.tracks = Array.from({length: this.totalCount});

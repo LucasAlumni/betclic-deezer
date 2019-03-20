@@ -77,7 +77,7 @@ describe('PlaylistComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should have playlist id from current route', () => {
+  it('should have a id in current route', () => {
     expect(component.id).toBe('5');
   });
 
@@ -87,7 +87,7 @@ describe('PlaylistComponent', () => {
     expect(component.playlist).toEqual(fakePlaylist);
   });
 
-  it('should have a total count ', () => {
+  it('should have a total count equal tracks arr length', () => {
     getTestScheduler().flush();
     fixture.detectChanges();
     expect(component.totalCount).toBe(70);

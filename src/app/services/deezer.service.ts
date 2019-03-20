@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 // Class & Interfaces
-import { Playlist, DeezerResponse } from './deezer.class';
+import { Playlist, DeezerResponse, Track } from './deezer.class';
 /**
  * Deezer Service
  */
@@ -48,7 +48,17 @@ export class DeezerService {
    * @param id
    */
   public getTracks(id: string, index: number, rows: number): Observable<DeezerResponse> {
-    return this.http.jsonp<DeezerResponse>(`${this.playlistURL}/${id}/tracks?index=${index}&limit=${rows}&output=jsonp`, 'callback');
+    return this.http.jsonp<DeezerResponse>(`${this.playlistURL}/${id}/tracks?index=${index}&limit=${rows}&output=jsonp`, 'callback').pipe(
+      map(res => {
+        res.data = res.data.map(item => new Track(
+          item.id,
+          item.title,
+          item.artist.name,
+          item.duration
+        ));
+        return res;
+      })
+    );
   }
   /**
    * @name mappingPlaylist

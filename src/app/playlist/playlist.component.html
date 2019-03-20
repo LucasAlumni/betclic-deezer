@@ -23,7 +23,11 @@
     <cdk-virtual-scroll-viewport class="tracks-viewport" [itemSize]="itemSize" [ngStyle]="{'height': scrollHeight + 'px' }" (scrolledIndexChange)="onScrollIndexChange($event)">
       <div *cdkVirtualFor="let track of tracks" [ngStyle]="{'height': itemSize + 'px'}" >
         <div class="track-item" fxLayout>
-          <span *ngIf="track; else loading">{{track.title}}</span>
+          <div *ngIf="track; else loading" fxLayout="column" fxLayoutGap=".4em">
+            <h4>{{track.title}}</h4>
+            <span>Artist: {{ track.artistName }}</span>
+            <span>Duration : {{ track.duration | secondsToTime }}</span>
+          </div>
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
