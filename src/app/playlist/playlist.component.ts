@@ -30,7 +30,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
    */
   public totalCount: number;
   /**
-   * item size for
+   * item size
    */
   public itemSize: number = 100;
   /**

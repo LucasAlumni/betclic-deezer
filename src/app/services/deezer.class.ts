@@ -14,3 +14,10 @@ export class Playlist {
     public duration: number
   ) {}
 }
+export interface DeezerResponse {
+  checksum: string;
+  data: any[];
+  total: number;
+  next?: string;
+  prev?: string;
+}

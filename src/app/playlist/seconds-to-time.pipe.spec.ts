@@ -1,8 +1,11 @@
 import { SecondsToTimePipe } from './seconds-to-time.pipe';
 
 describe('SecondsToTimePipe', () => {
-  it('create an instance', () => {
-    const pipe = new SecondsToTimePipe();
-    expect(pipe).toBeTruthy();
+  const pipe = new SecondsToTimePipe();
+  it('providing no value return default value', () => {
+    expect(pipe.transform(null)).toBe('00:00:00');
+  });
+  it('should transform seconds to time', () => {
+    expect(pipe.transform(6000)).toBe('01:40:00');
   });
 });
