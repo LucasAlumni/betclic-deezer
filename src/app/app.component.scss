@@ -5,6 +5,9 @@ header {
   background-color: #24292e;
   color: #fff;
   text-align: center;
+  h1 {
+    cursor: pointer;
+  }
 }
 #app-wrapper {
   padding: .625em 1em;
