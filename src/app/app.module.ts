@@ -16,11 +16,13 @@ import { DeezerService } from './services/deezer.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SecondsToTimePipe } from './playlist/seconds-to-time.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    SecondsToTimePipe
   ],
   imports: [
     BrowserModule,

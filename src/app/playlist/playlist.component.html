@@ -8,7 +8,7 @@
     <div *ngIf="playlist" fxLayout fxLayoutAlign="space-between">
       <div fxLayout="column" fxLayoutGap=".6em">
         <span>Title : {{playlist.title}}</span>
-        <span>Duration : {{ (playlist.duration * 1000) | date:'HH:mm:ss'}}</span>
+        <span>Duration : {{ playlist.duration | secondsToTime }}</span>
         <span>Author : {{ playlist.author?.name}}</span>
       </div>
       <img [src]="playlist.cover" alt="playlist-cover" class="cover">
