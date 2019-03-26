@@ -10,10 +10,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  /**
+   * list of playlist
+   * @type { Observable<Playlist[]> }
+   */
   public playlists$: Observable<Playlist[]>;
   /**
-   * Inject
-   * @param deezerSvc
+   * Dependencies
+   * @param { Router } router
+   * @param { DeezerService } deezerSvc
    */
   constructor(
     private router: Router,
@@ -26,9 +31,10 @@ export class HomeComponent implements OnInit {
     this.playlists$ = this.deezerSvc.getAllPlaylist('5');
   }
   /**
-   * @name goPlaylist
-   * @param id: playlist
-   * @desc Link to go playlist
+   * goPlaylist()
+   *
+   * Go to the playlist
+   * @param { string } id playlist id
    */
   public goPlaylist(id: number) {
     this.router.navigate(['playlist', id]);

@@ -13,21 +13,24 @@ import { Playlist, DeezerResponse, Track } from './deezer.class';
 })
 export class DeezerService {
   /**
-   * @name userURL
+   * userURL
+   * @type { string }
    */
   private userURL: string = `${environment.api}/user`;
   /**
-   * @name playlistURL
+   * playlistURL
+   * @type { string }
    */
   private playlistURL: string = `${environment.api}/playlist`;
   /**
    * Inject HttpClient
-   * @param http
+   * @param { HttpClient } http
    */
   constructor(private http: HttpClient) { }
   /**
-   * @name getAllPlaylist
-   * @param id
+   * getAllPlaylist
+   * @param { string } id
+   * @return { Observable<Playlist[]> } A observable playlist list
    */
   public getAllPlaylist(id: string): Observable<Playlist[]> {
     return this.http.jsonp<DeezerResponse>(`${this.userURL}/${id}/playlists?output=jsonp`, 'callback').pipe(
@@ -35,8 +38,9 @@ export class DeezerService {
     );
   }
   /**
-   * @name getPlaylist
-   * @param id
+   * getPlaylist
+   * @param { string } id
+   * @return { Observable<Playlist> } A observable playlist
    */
   public getPlaylist(id: string): Observable<Playlist> {
     return this.http.jsonp<any>(`${this.playlistURL}/${id}?output=jsonp`, 'callback').pipe(
@@ -44,8 +48,9 @@ export class DeezerService {
     );
   }
   /**
-   * @name getTracks
-   * @param id
+   * getTracks
+   * @param { string } id
+   * @return { Observable<DeezerResponse> } Return a observable
    */
   public getTracks(id: string, index: number, rows: number): Observable<DeezerResponse> {
     return this.http.jsonp<DeezerResponse>(`${this.playlistURL}/${id}/tracks?index=${index}&limit=${rows}&output=jsonp`, 'callback').pipe(
@@ -61,8 +66,9 @@ export class DeezerService {
     );
   }
   /**
-   * @name mappingPlaylist
-   * @param item
+   * mappingPlaylist
+   * @param {*} item
+   * @return { Playlist } A playlist
    */
   private mappingPlaylist(item): Playlist {
     return new Playlist(

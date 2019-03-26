@@ -46,9 +46,9 @@ export class PlaylistComponent implements OnInit, OnDestroy {
    */
   public page: number = 0;
   /**
-   * Injected
-   * @param route
-   * @param deezerSvc
+   * Dependencies
+   * @param { ActivatedRoute } route
+   * @param { DeezerService } deezerSvc
    */
   constructor(
     private route: ActivatedRoute,
@@ -64,10 +64,10 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
   /**
    * Get Data
-   * @param index
-   * @param rows
+   * @param { number } index
+   * @param { number } rows
    */
-  getData(index: number, rows: number): void {
+  private getData(index: number, rows: number): void {
     this.tracks$ = this.deezerSvc.getTracks(this.id, index, rows).subscribe(res => {
       const data: Track[] = res.data;
       if (!this.tracks && index === 0) {
@@ -86,13 +86,13 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
   /**
    * Event on scroll
-   * @param index
+   * @param { number } index
    */
-  onScrollIndexChange(index: number) {
-    const currentPage = Math.floor(index / this.rows);
+  public onScrollIndexChange(index: number) {
+    const currentPage: number = Math.floor(index / this.rows);
     if (currentPage !== this.page) {
       this.page = currentPage;
-      const currentIdx = this.page * this.rows;
+      const currentIdx: number = this.page * this.rows;
       this.getData(currentIdx, this.rows);
     }
   }
